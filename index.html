@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Box of Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --maroon: #8B4757;
+            --pink: #F5D5D9;
+            --cream: #FFFAF0;
+            --accent: #D4A5A5;
+            --text: #5A3A42;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--pink);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--maroon);
+            border-radius: 4px;
+        }
+
+        /* Landing Section */
+        .landing {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--pink) 100%);
+        }
+
+        .landing::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 71, 87, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .landing::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 165, 165, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .landing-content {
+            z-index: 1;
+            max-width: 700px;
+            padding: 40px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .heart-icon {
+            font-size: 60px;
+            margin-bottom: 30px;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--maroon);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 50px;
+            background: var(--maroon);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 71, 87, 0.2);
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 71, 87, 0.3);
+            background: #6B3547;
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(139, 71, 87, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(139, 71, 87, 0.5);
+            }
+        }
+
+        /* Story Section */
+        .story-section {
+            min-height: 100vh;
+            padding: 100px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, var(--cream), var(--pink));
+        }
+
+        .story-container {
+            max-width: 800px;
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(139, 71, 87, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--maroon);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+
+        .story-moment {
+            background: var(--pink);
+            padding: 20px;
+            border-left: 4px solid var(--maroon);
+            margin: 20px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        /* Moments Section */
+        .moments-section {
+            min-height: 100vh;
+            padding: 100px 40px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .moments-grid {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .moment-card {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--cream) 100%);
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 15px;
+            border: 2px solid var(--accent);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .moment-card:nth-child(even) {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .moment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(139, 71, 87, 0.15);
+            border-color: var(--maroon);
+        }
+
+        .moment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .moment-title {
+            font-size: 1.5rem;
+            color: var(--maroon);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .moment-text {
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* Adoration Section */
+        .adoration-section {
+            min-height: 100vh;
+            padding: 100px 40px;
+            background: linear-gradient(to bottom, var(--cream), var(--pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .adoration-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .admiration-item {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 71, 87, 0.08);
+            border-left: 5px solid var(--maroon);
+            animation: fadeInUp 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .admiration-item:hover {
+            box-shadow: 0 15px 40px rgba(139, 71, 87, 0.15);
+            transform: translateX(10px);
+        }
+
+        .admiration-label {
+            color: var(--maroon);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .admiration-text {
+            color: var(--text);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Hidden Surprise Section */
+        .surprise-section {
+            min-height: 100vh;
+            padding: 100px 40px;
+            background: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .surprise-section.revealed {
+            display: flex;
+            opacity: 1;
+        }
+
+        .surprise-container {
+            max-width: 800px;
+            background: linear-gradient(135deg, var(--maroon) 0%, var(--accent) 100%);
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 60px rgba(139, 71, 87, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .surprise-title {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .surprise-content {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .surprise-note {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid white;
+            font-style: italic;
+        }
+
+        .unlock-hint {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--maroon);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            animation: glow 2s ease-in-out infinite;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 8px 25px rgba(139, 71, 87, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .unlock-hint.show {
+            display: block;
+        }
+
+        .unlock-hint:hover {
+            transform: scale(1.05);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--maroon);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .story-container,
+            .surprise-container {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .adoration-container,
+            .moments-grid {
+                padding: 0 20px;
+            }
+
+            .landing {
+                padding: 40px 20px;
+            }
+
+            .unlock-hint {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Section -->
+    <section class="landing" id="landing">
+        <div class="landing-content">
+            <div class="heart-icon">💌</div>
+            <h1>A Little Box of Us</h1>
+            <p class="subtitle">
+                A small corner of the internet where every moment we've shared, 
+                every laugh we've had, and every reason I adore you lives. 
+                <br><br>Just for you. Just for today. 💝
+            </p>
+            <button class="cta-button" onclick="scrollToSection('story')">
+                Open the Box
+            </button>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section" id="story">
+        <div class="story-container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="story-content">
+                <p>
+                    I still remember the moment I met you. Not just because of how you looked,
+                    but because of how you made the world feel—lighter, warmer, real. 
+                    There was something about the way you listened, the way you smiled at 
+                    the simplest things, that made me think, "Oh, this person gets it."
+                </p>
+                <div class="story-moment">
+                    "I didn't know I was waiting for you until you arrived, 
+                    and then suddenly everything made sense."
+                </div>
+                <p>
+                    From that first conversation to now, you've become the person who knows 
+                    my coffee order, who laughs at my terrible jokes before I even finish them, 
+                    and who somehow always knows when I need a hug without me saying anything. 
+                    You've woven yourself into the ordinary moments of my life and made them extraordinary.
+                </p>
+                <div class="story-moment">
+                    The mundane became magical the moment you became part of it.
+                </div>
+                <p>
+                    Every chapter with you has been a gift I didn't know I needed. 
+                    The adventures, the quiet nights, the inside jokes, the dreams we've whispered at midnight— 
+                    they're all pieces of a story I want to keep writing with you forever.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cherished Moments Section -->
+    <section class="moments-section" id="moments">
+        <div class="moments-grid">
+            <h2 class="section-title">The Moments I Miss Most</h2>
+            
+            <div class="moment-card">
+                <div class="moment-icon">☕</div>
+                <div class="moment-title">Morning Coffee Together</div>
+                <div class="moment-text">
+                    Those quiet moments before the day gets loud—when we're barely awake, 
+                    sharing the same coffee mug, talking about nothing and everything. 
+                    I miss how comfortable silence can be with you.
+                </div>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-icon">😂</div>
+                <div class="moment-title">That Specific Laugh</div>
+                <div class="moment-text">
+                    You know the one—when something catches you completely off-guard and you 
+                    can't help but genuinely laugh until your eyes crinkle. I chase that sound 
+                    because it means I've made you happy.
+                </div>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-icon">🚗</div>
+                <div class="moment-title">Car Rides & Playlists</div>
+                <div class="moment-text">
+                    Driving nowhere in particular, with our song playing, and you singing slightly 
+                    off-key while looking out the window. Those are the moments that feel like pure freedom.
+                </div>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-icon">🛏️</div>
+                <div class="moment-title">Late Night Conversations</div>
+                <div class="moment-text">
+                    When it's just us at night, and the world is sleeping, and we can talk about 
+                    our fears, our dreams, our weird thoughts. There's no pretense at 3 AM—
+                    just us being completely honest.
+                </div>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-icon">👐</div>
+                <div class="moment-title">Your Hand in Mine</div>
+                <div class="moment-text">
+                    Something so simple yet everything. The way you fit so perfectly, 
+                    the gentle squeeze when you pass by, the reassurance in that small gesture. 
+                    It says "I'm here, you're safe, we're okay."
+                </div>
+            </div>
+
+            <div class="moment-card">
+                <div class="moment-icon">🌙</div>
+                <div class="moment-title">Sleepy You</div>
+                <div class="moment-text">
+                    When you're almost asleep, your defenses come down. You're softer, 
+                    more vulnerable, and somehow even more beautiful. I love watching you 
+                    drift off, knowing you feel safe.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adoration Section -->
+    <section class="adoration-section" id="adoration">
+        <div class="adoration-container">
+            <h2 class="section-title">The Quiet Things I Adore About You</h2>
+            
+            <div class="admiration-item">
+                <div class="admiration-label">✨ Your Kindness</div>
+                <div class="admiration-text">
+                    The way you notice when someone is hurting without them saying a word. 
+                    How you go out of your way for people, not for praise, but because 
+                    your heart just naturally cares. That's rare, and it's beautiful.
+                </div>
+            </div>
+
+            <div class="admiration-item">
+                <div class="admiration-label">🧠 Your Mind</div>
+                <div class="admiration-text">
+                    How you see the world differently than most people. The random thoughts you share, 
+                    the way you connect dots others miss, how you're endlessly curious about everything. 
+                    Conversations with you never feel boring.
+                </div>
+            </div>
+
+            <div class="admiration-item">
+                <div class="admiration-label">💪 Your Strength</div>
+                <div class="admiration-text">
+                    Not just physical, but the way you handle challenges. You don't break; 
+                    you bend and adapt. You've taught me that being strong doesn't mean never falling apart—
+                    it means getting back up with grace.
+                </div>
+            </div>
+
+            <div class="admiration-item">
+                <div class="admiration-label">🎨 Your Creativity</div>
+                <div class="admiration-text">
+                    The way you bring color to ordinary days. Your perspective, 
+                    your ideas, the little things you do to make life more interesting. 
+                    You remind me not to take the world so seriously.
+                </div>
+            </div>
+
+            <div class="admiration-item">
+                <div class="admiration-label">💗 Your Loyalty</div>
+                <div class="admiration-text">
+                    You show up. Even when it's hard, even when no one's watching, you show up 
+                    for the people you love. That's not common. That's something I treasure every single day.
+                </div>
+            </div>
+
+            <div class="admiration-item">
+                <div class="admiration-label">😌 Your Presence</div>
+                <div class="admiration-text">
+                    Simply being around you is calming. I can be fully myself without explanation or apology. 
+                    That safety you provide? It's everything. It's home.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Surprise Section -->
+    <section class="surprise-section" id="surprise">
+        <div class="surprise-container">
+            <h2 class="surprise-title">💕 The Part I Saved For Last</h2>
+            <div class="surprise-content">
+                <p>
+                    You made it here. Which means you took the time to open this box with me, 
+                    moment by moment. Thank you for that.
+                </p>
+                <div class="surprise-note">
+                    "I love you not because of who you are, but because of who I am when I'm with you."
+                </div>
+                <p>
+                    You've changed my life in ways I'm still discovering. With you, 
+                    I feel brave enough to dream bigger. I feel worthy of love. 
+                    I feel like the person I've always wanted to be.
+                </p>
+                <div class="surprise-note">
+                    You're not just my person—you're my favorite person.
+                </div>
+                <p>
+                    So here's what I want you to know: I want a future with you. 
+                    I want to grow old with you, to create more memories, more inside jokes, 
+                    more moments where we look at each other and just smile because we know 
+                    what we have is real, and it's worth everything.
+                </p>
+                <p style="margin-top: 40px; font-size: 1.4rem; font-weight: 300;">
+                    Happy Valentine's Day to the person who makes every day feel like love. 💕
+                </p>
+                <p style="margin-top: 20px; font-style: italic; opacity: 0.85;">
+                    Forever yours,<br>
+                    Your person
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unlock Hint Button -->
+    <div class="unlock-hint" id="unlockHint" onclick="revealSurprise()">
+        ✨ Keep scrolling... there's more 💕
+    </div>
+
+    <script>
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Reveal surprise section
+        function revealSurprise() {
+            const surpriseSection = document.getElementById('surprise');
+            surpriseSection.classList.add('revealed');
+            
+            setTimeout(() => {
+                surpriseSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+            
+            document.getElementById('unlockHint').style.display = 'none';
+        }
+
+        // Show unlock hint after scrolling to adoration section
+        window.addEventListener('scroll', () => {
+            const adorationSection = document.getElementById('adoration');
+            const surpriseSection = document.getElementById('surprise');
+            const unlockHint = document.getElementById('unlockHint');
+            
+            const adorationPosition = adorationSection.offsetTop + adorationSection.offsetHeight;
+            const currentScroll = window.scrollY + window.innerHeight;
+            
+            if (currentScroll > adorationPosition && !surpriseSection.classList.contains('revealed')) {
+                unlockHint.classList.add('show');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all moment cards and admiration items
+        document.querySelectorAll('.moment-card, .admiration-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add subtle parallax effect on scroll (for floating elements)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const landingSection = document.querySelector('.landing::before');
+            if (landingSection) {
+                document.documentElement.style.setProperty(
+                    '--scroll-y',
+                    scrolled + 'px'
+                );
+            }
+        });
+    </script>
+</body>
+</html>
