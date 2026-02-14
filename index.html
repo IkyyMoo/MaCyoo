@@ -731,14 +731,15 @@
         window.addEventListener('scroll', () => {
             const adorationSection = document.getElementById('adoration');
             const surpriseSection = document.getElementById('surprise');
-            const unlockHint = document.getElementById('unlockHint');
+            const unlockHint = document.getElementById('unlockHint').style.display = 'none'; // ← HIDE BUTTON
             
             const adorationPosition = adorationSection.offsetTop + adorationSection.offsetHeight;
             const currentScroll = window.scrollY + window.innerHeight;
             
             if (currentScroll > adorationPosition && !surpriseSection.classList.contains('revealed')) {
-                unlockHint.classList.add('show');
-            }
+    surpriseSection.classList.add('revealed');  // ← AUTO REVEAL!
+    unlockHint.classList.add('show');
+        }
         });
 
         // Intersection Observer for fade-in animations
